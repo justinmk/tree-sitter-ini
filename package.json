@@ -12,5 +12,11 @@
     "ini"
   ],
   "author": "Justin M. Keyes",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.9"
+  }
 }
