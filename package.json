@@ -1,0 +1,16 @@
+{
+  "name": "tree-sitter-ini",
+  "version": "1.0.0",
+  "description": "INI grammar for tree-sitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "tree-sitter test"
+  },
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "ini"
+  ],
+  "author": "Justin M. Keyes",
+  "license": "MIT"
+}
