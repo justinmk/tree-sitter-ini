@@ -1,0 +1,13 @@
+[default]
+region = us-west-2
+output = json
+
+[profile dev-user]
+region = us-east-1
+output = text
+
+[profile developers]
+role_arn = arn:aws:iam::123456789012:role/developers
+source_profile = dev-user
+region = us-west-2
+output = json
