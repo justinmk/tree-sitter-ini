@@ -1,6 +1,5 @@
 module.exports = grammar({
-  name: 'YOUR_LANGUAGE_NAME',
-
+  name: 'ini',
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => 'hello'
