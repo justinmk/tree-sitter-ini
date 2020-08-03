@@ -8,20 +8,9 @@
       "required": false,
       "types": [
         {
-          "type": "section",
+          "type": "comment",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
+        },
         {
           "type": "section_name",
           "named": true
@@ -58,10 +47,6 @@
     }
   },
   {
-    "type": "\n",
-    "named": false
-  },
-  {
     "type": "=",
     "named": false
   },
@@ -72,6 +57,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "setting_name",

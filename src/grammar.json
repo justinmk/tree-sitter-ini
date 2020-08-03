@@ -4,29 +4,39 @@
     "document": {
       "type": "REPEAT",
       "content": {
-        "type": "SYMBOL",
-        "name": "section"
-      }
-    },
-    "section": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "section_name"
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "setting"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "section_name"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "setting"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\n+"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
-        }
-      ]
+        ]
+      }
     },
     "section_name": {
       "type": "SEQ",
@@ -37,7 +47,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^\\[\\]]+"
+          "value": "[^\\[\\]\\n]+"
         },
         {
           "type": "STRING",
@@ -59,35 +69,26 @@
         {
           "type": "SYMBOL",
           "name": "setting_value"
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
         }
       ]
     },
     "setting_name": {
       "type": "PATTERN",
-      "value": "[^=]+"
+      "value": "[^#=\\s\\[]+"
     },
     "setting_value": {
       "type": "PATTERN",
-      "value": "[^\\n]+"
+      "value": "[^#\\n]+"
     },
     "comment": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "#"
-          },
-          {
-            "type": "PATTERN",
-            "value": ".*"
-          }
-        ]
+        "type": "PREC",
+        "value": -10,
+        "content": {
+          "type": "PATTERN",
+          "value": "#.*"
+        }
       }
     }
   },
@@ -98,7 +99,7 @@
     },
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t]+"
     }
   ],
   "conflicts": [],
