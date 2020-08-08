@@ -1,18 +1,19 @@
+
 [default]
 region = us-west-2
-
-
-
 output = json
-
-# 4, 18
 [profile dev-user]
 region = us-east-1
 output = text
 
-# 8, 20
 [profile developers]
 role_arn = arn:aws:iam::123456789012:role/developers
+# foo
 source_profile = dev-user
 region = us-west-2
 output = json
+                     
+
+
+# foo
+

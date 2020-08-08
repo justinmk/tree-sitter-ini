@@ -2,38 +2,55 @@
   "name": "ini",
   "rules": {
     "document": {
-      "type": "REPEAT",
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[\\n]*"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "section"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "section": {
+      "type": "PREC_LEFT",
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "section_name"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "setting"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "comment"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "section_name"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\n+"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "[\\n]+"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "setting"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[\\n]+"
+                }
+              ]
+            }
           }
         ]
       }
@@ -87,7 +104,7 @@
         "value": -10,
         "content": {
           "type": "PATTERN",
-          "value": "#.*"
+          "value": "#.*\\n+"
         }
       }
     }
@@ -99,7 +116,7 @@
     },
     {
       "type": "PATTERN",
-      "value": "[ \\t]+"
+      "value": "[ \\t]+\\n*"
     }
   ],
   "conflicts": [],

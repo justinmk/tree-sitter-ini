@@ -194,8 +194,12 @@ to define grammars.
     - `prec.dynamic(number, rule)` decides precedence at runtime! Uses the
       `conflicts` field in the grammar, when there is a "genuine ambiguity"
       (multiple matching rules).
-  - `token(rule)` marks a rule as producing a single token, so you can express
-    a complex rule with many rules instead of a single, complex regex.
+  - `token(rule)` marks a rule as producing a single token; the entire rule
+    subtree will be handled atomically by the lexer, as if you had written it
+    all using a single regular expression.
+    - Its content will be represented in the final syntax tree as a single leaf node.
+      (Whereas If you don't use TOKEN, there will be a separate leaf node in
+      the tree for each string literal or regexp in the subtree.)
   - `alias(rule, name)` renames a rule in the AST.
     - Example: `alias($.foo, $.bar)` appears as _named_ node `bar`
     - Example: `alias($.foo, 'bar')` appears as _anonymous_ node "bar".
@@ -416,3 +420,11 @@ An ini file without a section heading is an error.
       (ERROR [0, 0] - [0, 9]
         (ERROR [0, 0] - [0, 3])
         (ERROR [0, 6] - [0, 9])))
+
+# Preventing duplicate symbols
+
+From an [early tree-sitter discussion](https://github.com/tree-sitter/tree-sitter/issues/130#issuecomment-364830185), author Max Brunsfeld:
+
+> Thus far, I don't really consider "type II correctness" to be a goal for Tree-sitter, because I think it's fundamentally incompatible with one of the most important goals of the project: to be able to parse source code files based solely on their language, without knowing any auxiliary information about the files.
+>
+> For example, tree-sitter-python should be able to parse any python code you can find, without knowing what python version the code is meant to run on. That means it needs to parse the union of Python 2 and Python 3.

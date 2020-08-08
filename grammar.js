@@ -3,38 +3,29 @@ module.exports = grammar({
 
   extras: $ => [
     $.comment,
-    /[ \t]+/,
+    /[ \t]+\n*/,  // Ignore empty lines.
   ],
 
   rules: {
-    document: $ => repeat(seq(
-      choice(
-        $.section_name,
+
+    document: $ => seq(
+      /[\n]*/,
+      repeat(seq(
+        $.section,
+      )),
+    ),
+
+    // Section has:
+    // - a title
+    // - zero or more settings (name=value pairs)
+    section: $ => prec.left(seq(
+      $.section_name,
+      /[\n]+/,
+      repeat(seq(
         $.setting,
-        $.comment,
-      ),
-      optional(/\n+/),
+        /[\n]+/,
+      )),
     )),
-
-    // sections: $ => prec(1, seq(
-    //   repeat(seq(
-    //     $.section,
-    //     '\n'
-    //   )),
-    //   $.section,
-    //   optional('\n')
-    // )),
-
-    // section: $ => prec.left(seq(
-    //   /[\n]*/,
-    //   // Section must have a name.
-    //   $.section_name,
-    //   // Zero or more settings (name=value pairs).
-    //   // TODO: how to make this optional?
-    //   repeat1(seq(
-    //     /[\n]+/,
-    //     $.setting)),
-    // )),
 
     section_name: $ => seq(
       '[',
@@ -51,15 +42,6 @@ module.exports = grammar({
     setting_name: $ => /[^#=\s\[]+/,
     setting_value: $ => /[^#\n]+/,
 
-    comment: $ => token(prec(-10, /#.*/)),
+    comment: $ => token(prec(-10, /#.*\n+/)),
   }
 });
-
-function linesep1(rule) {
-  return seq(rule, repeat(seq('\n', rule)))
-}
-
-function linesep(rule) {
-  return optional(linesep1(rule))
-  // return linesep1(rule)
-}
