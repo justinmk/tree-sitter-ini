@@ -2,7 +2,7 @@
   "name": "tree-sitter-ini",
   "version": "1.0.0",
   "description": "INI grammar for tree-sitter",
-  "main": "index.js",
+  "main": "bindins/node",
   "scripts": {
     "test": "tree-sitter test"
   },
@@ -14,9 +14,17 @@
   "author": "Justin M. Keyes",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.14.1"
+    "nan": "^2.17.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.16.9"
-  }
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.ini",
+      "file-types": [
+        "ini"
+      ]
+    }
+  ]
 }
