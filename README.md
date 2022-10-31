@@ -31,5 +31,5 @@ Steps to perform a release:
    ```
    git push --follow-tags
    ```
-4. Release the tagged commit: https://github.com/neovim/tree-sitter-vimdoc/releases/new
+4. Release the tagged commit: https://github.com/justinmk/tree-sitter-ini/releases/new
 
