@@ -70,6 +70,10 @@
     "named": false
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "setting_name",
     "named": true
   },
