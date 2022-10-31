@@ -2,7 +2,7 @@
   "name": "tree-sitter-ini",
   "version": "1.0.0",
   "description": "INI grammar for tree-sitter",
-  "main": "bindins/node",
+  "main": "bindings/node",
   "scripts": {
     "test": "tree-sitter test"
   },
