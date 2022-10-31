@@ -1,4 +1,4 @@
-tree-sitter-vimdoc
+tree-sitter-ini
 ==================
 
 This grammar implements the INI format.
