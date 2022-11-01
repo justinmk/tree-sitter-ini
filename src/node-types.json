@@ -1,8 +1,34 @@
 [
   {
-    "type": "document",
+    "type": "comment",
     "named": true,
     "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "fields": {
+      "blank": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "\n",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -36,7 +62,17 @@
   {
     "type": "section_name",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "setting",
@@ -58,6 +94,14 @@
     }
   },
   {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "#",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
@@ -70,15 +114,15 @@
     "named": false
   },
   {
-    "type": "comment",
-    "named": true
-  },
-  {
     "type": "setting_name",
     "named": true
   },
   {
     "type": "setting_value",
+    "named": true
+  },
+  {
+    "type": "text",
     "named": true
   }
 ]
