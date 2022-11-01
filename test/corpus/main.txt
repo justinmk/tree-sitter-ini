@@ -1,76 +1,126 @@
-==================
+================================================================================
 one section
-==================
+================================================================================
 
 [a section title]
 foo = bar
 
----
+--------------------------------------------------------------------------------
 
 (document
   (section
-    (section_name)
-      (setting (setting_name) (setting_value))))
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))))
 
-==================
+================================================================================
 many sections, some empty
-==================
+================================================================================
+
+# comment ...
 
 [a section title]
-foo = bar
+  foo = bar
 [section 2]
-foo = bar
+        foo    =      bar
+
 [section 3, which is empty]
 [section4]
+2f_a3-x =  not! an equals sign...
 foo = bar
-foo = bar
+
 # Interesting note about duplicates in tree-sitter:
+
 # https://github.com/tree-sitter/tree-sitter/issues/130
-foo = bar
-foo = bar
+# foo
+
+
+--foo-- = bar
+``foo`` = bar
 
 
 # a straggler comment...
 
----
+
+# another
+
+--------------------------------------------------------------------------------
 
 (document
-  (section (section_name)
-    (setting (setting_name) (setting_value)))
-  (section (section_name)
-    (setting (setting_name) (setting_value)))
-  (section (section_name))
-  (section (section_name)
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value))
-    (comment)
-    (comment)
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value)))
-    (comment))
+  (comment
+    (text))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (section
+    (section_name
+      (text)))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value))
+    (comment
+      (text))
+    (comment
+      (text))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (comment
+    (text))
+  (comment
+    (text)))
 
-===================
+================================================================================
 only comments
-===================
+================================================================================
 #      
 #
 
----
+--------------------------------------------------------------------------------
 
-(document (comment) (comment))
+(document
+  (comment
+    (text))
+  (comment
+    (text)))
 
-===================
+================================================================================
 one section (empty)
-===================
+================================================================================
 [section with no content]
 
----
+--------------------------------------------------------------------------------
 
-(document (section (section_name)))
+(document
+  (section
+    (section_name
+      (text))))
 
-===================
+================================================================================
 ~/.aws/config
-===================
+================================================================================
 # AWS config doc:
 #   https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html
 
@@ -95,23 +145,51 @@ output = json
 
 # foo
                
----
+--------------------------------------------------------------------------------
 
 (document
-  (comment)
-  (comment)
-  (section (section_name)
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value)))
-  (section (section_name)
-    (comment)
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value)))
-  (section (section_name)
-    (setting (setting_name) (setting_value))
-    (comment)
-    (comment)
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value))
-    (setting (setting_name) (setting_value)))
-  (comment))
+  (comment
+    (text))
+  (comment
+    (text))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (section
+    (section_name
+      (text))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (comment
+      (text))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (comment
+    (text)))

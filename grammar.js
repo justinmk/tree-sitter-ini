@@ -3,16 +3,14 @@ module.exports = grammar({
 
   extras: $ => [
     $.comment,
-    /[ \t]+\n*/,  // Ignore empty lines.
+    $._blank,
+    /[\t ]/
   ],
 
   rules: {
-
     document: $ => seq(
-      /[\n]*/,
-      repeat(seq(
-        $.section,
-      )),
+      repeat($._blank),  // Eat blank lines at top of file.
+      repeat($.section),
     ),
 
     // Section has:
@@ -20,28 +18,29 @@ module.exports = grammar({
     // - zero or more settings (name=value pairs)
     section: $ => prec.left(seq(
       $.section_name,
-      /[\n]+/,
       repeat(seq(
         $.setting,
-        /[\n]+/,
       )),
     )),
 
     section_name: $ => seq(
       '[',
-      /[^\[\]\n]+/,
-      ']'
+      alias(/[^\[\]\n]+/, $.text),
+      ']',
+      '\n',
     ),
 
     setting: $ => seq(
-      $.setting_name,
+      alias(/[^#=\s\[]+/, $.setting_name),
       '=',
-      $.setting_value
+      alias(/.+/, $.setting_value),
+      '\n',
     ),
 
-    setting_name: $ => /[^#=\s\[]+/,
-    setting_value: $ => /[^#\n]+/,
+    // setting_name: () => /[^#=\s\[]+/,
+    // setting_value: () => /[^#\n]+/,
+    comment: $ => seq('#', alias(/.*/, $.text), '\n'),
 
-    comment: $ => token(prec(-10, /#.*\n+/)),
+    _blank: () => field('blank', '\n'),
   }
 });
