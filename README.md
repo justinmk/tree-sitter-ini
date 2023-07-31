@@ -26,8 +26,13 @@ See [test/corpus/](./test/corpus/) for more examples.
 Known issues
 ------------
 
-todo
+- `setting_value` [includes whitespace](https://github.com/justinmk/tree-sitter-ini/issues/3).
+  Should values exclude surrounding whitespace?
 
+Reference
+---------
+
+- https://github.com/textmate/ini.tmbundle
 
 Release
 -------
