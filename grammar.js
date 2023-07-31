@@ -39,7 +39,7 @@ module.exports = grammar({
 
     // setting_name: () => /[^#=\s\[]+/,
     // setting_value: () => /[^#\n]+/,
-    comment: $ => seq('#', alias(/.*/, $.text), '\n'),
+    comment: $ => seq(/[;#]/, alias(/.*/, $.text), '\n'),
 
     _blank: () => field('blank', '\n'),
   }

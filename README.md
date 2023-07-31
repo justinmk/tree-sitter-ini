@@ -6,7 +6,22 @@ This grammar implements the INI format.
 Overview
 --------
 
-todo
+Example INI file:
+
+    [section name]
+    some_key = some_value
+    another-key = another value
+
+    [another section]
+    # a comment
+    some_key = some_value
+    another-key = another value
+
+See [test/corpus/](./test/corpus/) for more examples.
+
+### Notes
+
+- Comments must start at column 1. Trailing comments are not supported. (Should they be?)
 
 Known issues
 ------------
