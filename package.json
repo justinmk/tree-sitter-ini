@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-ini",
-  "version": "1.1.1-dev.0",
+  "version": "1.1.1",
   "description": "INI grammar for tree-sitter",
   "main": "bindings/node",
   "scripts": {
