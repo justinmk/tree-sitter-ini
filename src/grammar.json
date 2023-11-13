@@ -78,7 +78,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^#=\\s\\[]+"
+            "value": "[^;#=\\s\\[]+"
           },
           "named": true,
           "value": "setting_name"
