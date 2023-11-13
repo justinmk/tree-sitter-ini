@@ -110,6 +110,49 @@ only comments
     (text)))
 
 ================================================================================
+mixed comments #5
+================================================================================
+; comment1
+[section1]
+; comment2
+# comment3
+key1=val1
+
+# comment1
+[section2]
+# comment2
+; comment3
+key1=val1
+
+--------------------------------------------------------------------------------
+
+(document
+  (comment
+    (text))
+  (section
+    (section_name
+      (text))
+    (comment
+      (text))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (comment
+    (text))
+  (section
+    (section_name
+      (text))
+    (comment
+      (text))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))))
+
+================================================================================
 one section (empty)
 ================================================================================
 [section with no content]
