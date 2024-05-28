@@ -11,6 +11,13 @@
     "parser",
     "ini"
   ],
+  "files": [
+      "grammar.js",
+      "binding.gyp",
+      "bindings/node/*",
+      "queries/**",
+      "src/**"
+  ],
   "author": "Justin M. Keyes",
   "license": "MIT",
   "dependencies": {
@@ -22,9 +29,11 @@
   "tree-sitter": [
     {
       "scope": "source.ini",
+      "highlights": "queries/highlights.scm",
       "file-types": [
         "ini"
       ]
     }
   ]
 }
+
