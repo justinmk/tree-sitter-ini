@@ -78,7 +78,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^;#=\\s\\[]+"
+            "value": "[^;#=\\s\\[]+( *[^;#=\\s\\[])*"
           },
           "named": true,
           "value": "setting_name"
@@ -153,4 +153,3 @@
   "inline": [],
   "supertypes": []
 }
-
