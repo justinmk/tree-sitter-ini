@@ -16,6 +16,38 @@ foo = bar
       (setting_value))))
 
 ================================================================================
+weird key names
+================================================================================
+
+# key with whitespace https://github.com/justinmk/tree-sitter-ini/issues/11
+[fruit.Date]
+taste = novel
+Trademark Issues="truly unlikely"
+ignore all white space   =   my value
+ x   =    v
+
+--------------------------------------------------------------------------------
+
+(document
+  (comment
+    (text))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value))))
+
+================================================================================
 many sections, some empty
 ================================================================================
 
