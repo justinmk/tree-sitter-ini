@@ -25,22 +25,22 @@ module.exports = grammar({
 
     section_name: $ => seq(
       '[',
-      alias(/[^\[\]\n]+/, $.text),
+      alias(/[^\[\]]+/, $.text),
       ']',
-      '\n',
+      /\r?\n/,
     ),
 
     setting: $ => seq(
       alias(/[^;#=\s\[]+( *[^;#=\s\[])*/, $.setting_name),
       '=',
       alias(/.+/, $.setting_value),
-      '\n',
+      /\r?\n/,
     ),
 
     // setting_name: () => /[^#=\s\[]+/,
     // setting_value: () => /[^#\n]+/,
-    comment: $ => seq(/[;#]/, alias(/.*/, $.text), '\n'),
+    comment: $ => seq(/[;#]/, alias(/.*/, $.text), /\r?\n/),
 
-    _blank: () => field('blank', '\n'),
+    _blank: () => field('blank', /\r?\n/),
   }
 });
