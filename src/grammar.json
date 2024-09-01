@@ -88,13 +88,21 @@
           "value": "="
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": ".+"
-          },
-          "named": true,
-          "value": "setting_value"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": ".+"
+              },
+              "named": true,
+              "value": "setting_value"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "PATTERN",
