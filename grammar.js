@@ -16,6 +16,7 @@ module.exports = grammar({
     // Section has:
     // - a title
     // - zero or more settings (name=value pairs)
+    // - comments (optional)
     section: $ => prec.left(seq(
       $.section_name,
       repeat(seq(
@@ -37,9 +38,7 @@ module.exports = grammar({
       /\r?\n/,
     ),
 
-    // setting_name: () => /[^#=\s\[]+/,
-    // setting_value: () => /[^#\n]+/,
-    comment: $ => seq(/[;#]/, alias(/.*/, $.text), /\r?\n/),
+    comment: $ => seq(/[;#]/, alias(/[^\r\n]*/, $.text), /\r?\n/),
 
     _blank: () => field('blank', /\r?\n/),
   }
