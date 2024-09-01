@@ -352,28 +352,25 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 19:
       ACCEPT_TOKEN(aux_sym_comment_token1);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(22);
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(21);
       END_STATE();
     case 20:
       ACCEPT_TOKEN(aux_sym_comment_token2);
-      if (lookahead == '\n') ADVANCE(12);
-      if (lookahead != 0) ADVANCE(22);
-      END_STATE();
-    case 21:
-      ACCEPT_TOKEN(aux_sym_comment_token2);
-      if (lookahead == '\r') ADVANCE(20);
       if (lookahead == '\t' ||
-          lookahead == ' ') ADVANCE(21);
+          lookahead == ' ') ADVANCE(20);
       if (lookahead == '#' ||
           lookahead == ';') ADVANCE(19);
       if (lookahead != 0 &&
           lookahead != '\t' &&
-          lookahead != '\n') ADVANCE(22);
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(21);
       END_STATE();
-    case 22:
+    case 21:
       ACCEPT_TOKEN(aux_sym_comment_token2);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(22);
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(21);
       END_STATE();
     default:
       return false;
@@ -401,7 +398,7 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [17] = {.lex_state = 2},
   [18] = {.lex_state = 0},
   [19] = {.lex_state = 3},
-  [20] = {.lex_state = 21},
+  [20] = {.lex_state = 20},
   [21] = {.lex_state = 0},
   [22] = {.lex_state = 0},
   [23] = {.lex_state = 0},

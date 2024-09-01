@@ -113,7 +113,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": ".*"
+            "value": "[^\\r\\n]*"
           },
           "named": true,
           "value": "text"
