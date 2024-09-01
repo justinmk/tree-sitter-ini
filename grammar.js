@@ -34,7 +34,7 @@ module.exports = grammar({
     setting: $ => seq(
       alias(/[^;#=\s\[]+( *[^;#=\s\[])*/, $.setting_name),
       '=',
-      alias(/.+/, $.setting_value),
+      optional(alias(/.+/, $.setting_value)),
       /\r?\n/,
     ),
 

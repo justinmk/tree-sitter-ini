@@ -16,6 +16,44 @@ foo = bar
       (setting_value))))
 
 ================================================================================
+setting value may be null/empty #9
+================================================================================
+
+[section 1]
+setting 1 =
+setting 2 = x
+setting 3 =
+# comment
+setting 4 = y
+setting-5 =
+
+[section 2]
+
+--------------------------------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)))
+  (section
+    (section_name
+      (text))))
+
+================================================================================
 weird key names
 ================================================================================
 

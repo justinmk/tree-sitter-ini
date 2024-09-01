@@ -1,37 +1,45 @@
 tree-sitter-ini
 ==================
 
-This grammar implements the INI format.
+This grammar implements the [INI format](https://en.wikipedia.org/wiki/INI_file).
 
 Overview
 --------
 
 Example INI file:
 
-    [section name]
-    some_key = some_value
-    another-key = another value
+```ini
+[section name]
+some_key = some_value
+# a comment
+another-key=another value
 
-    [another section]
-    # a comment
-    some_key = some_value
-    another-key = another value
+[another section]
+# Keys may contain whitespace.
+key 1 =
+# Value may be empty.
+key 2 =
+```
 
 See [test/corpus/](./test/corpus/) for more examples.
 
-### Notes
+Notes
+-----
 
-- Comments must start at column 1. Trailing comments are not supported. (Should they be?)
-
-Known issues
-------------
-
-- `setting_value` [includes whitespace](https://github.com/justinmk/tree-sitter-ini/issues/3).
+- Comments (`;` or `#`) must start at column 1. Trailing comments are not supported yet. [#13](https://github.com/justinmk/tree-sitter-ini/issues/13)
+- Equals sign (=) and semicolon (;) are reserved characters and cannot appear in the key. Any whitespace surrounding the key is stripped by the parser. [ref](https://en.wikipedia.org/wiki/INI_file#Key-value_pairs)
+- Section name must appear on a line by itself.
+- Duplicate names are not checked.
+- Line continuations (`\`) are not supported.
+- `setting_value` includes whitespace. [#3](https://github.com/justinmk/tree-sitter-ini/issues/3).
   Should values exclude surrounding whitespace?
+- [Quoted keys/values](https://en.wikipedia.org/wiki/INI_file#Quoted_values) are not supported yet.
+- Escape sequences are not supported.
 
 Reference
 ---------
 
+- https://en.wikipedia.org/wiki/INI_file
 - https://github.com/textmate/ini.tmbundle
 
 Release
