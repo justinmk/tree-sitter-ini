@@ -56,7 +56,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^\\[\\]\\n]+"
+            "value": "[^\\[\\]]+"
           },
           "named": true,
           "value": "text"
@@ -66,8 +66,8 @@
           "value": "]"
         },
         {
-          "type": "STRING",
-          "value": "\n"
+          "type": "PATTERN",
+          "value": "\\r?\\n"
         }
       ]
     },
@@ -97,8 +97,8 @@
           "value": "setting_value"
         },
         {
-          "type": "STRING",
-          "value": "\n"
+          "type": "PATTERN",
+          "value": "\\r?\\n"
         }
       ]
     },
@@ -119,8 +119,8 @@
           "value": "text"
         },
         {
-          "type": "STRING",
-          "value": "\n"
+          "type": "PATTERN",
+          "value": "\\r?\\n"
         }
       ]
     },
@@ -128,8 +128,8 @@
       "type": "FIELD",
       "name": "blank",
       "content": {
-        "type": "STRING",
-        "value": "\n"
+        "type": "PATTERN",
+        "value": "\\r?\\n"
       }
     }
   },
