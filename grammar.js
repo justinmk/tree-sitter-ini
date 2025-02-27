@@ -1,3 +1,6 @@
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 module.exports = grammar({
   name: 'ini',
 
@@ -10,6 +13,7 @@ module.exports = grammar({
   rules: {
     document: $ => seq(
       repeat($._blank),  // Eat blank lines at top of file.
+      optional(repeat(seq($.setting))),
       repeat($.section),
     ),
 

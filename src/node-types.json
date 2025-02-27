@@ -26,6 +26,10 @@
         {
           "type": "section",
           "named": true
+        },
+        {
+          "type": "setting",
+          "named": true
         }
       ]
     }
