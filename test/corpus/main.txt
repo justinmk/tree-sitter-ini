@@ -354,3 +354,28 @@ output = json
       (setting_value)))
   (comment
     (text)))
+================================================================================
+global-parameters
+================================================================================
+# leading comment
+a=b
+# another comment
+[section]
+c=d
+
+--------------------------------------------------------------------------------
+
+(document
+  (comment
+      (text))
+  (setting
+    (setting_name)
+    (setting_value))
+  (comment
+      (text))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))))

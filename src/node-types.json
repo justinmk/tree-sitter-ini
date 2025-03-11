@@ -17,6 +17,7 @@
   {
     "type": "document",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -24,6 +25,10 @@
       "types": [
         {
           "type": "section",
+          "named": true
+        },
+        {
+          "type": "setting",
           "named": true
         }
       ]
