@@ -45,19 +45,28 @@ Reference
 Release
 -------
 
-Steps to perform a release:
+Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-parsers/6-publishing.html
 
-1. Bump and tag the version (choose `patch`/`minor`/`major` as appropriate).
+1. Update tree-sitter CLI.
    ```
-   npm version patch -m "release %s"
+   npm install tree-sitter-cli
    ```
-2. Bump to prerelease, without creating a tag .
+2. Bump the version.
    ```
-   npm version --no-git-tag-version prerelease --preid dev && git add package*.json && git commit -m bump
+   tree-sitter version x.y.z
    ```
-3. Push.
+3. Regenerate and test.
    ```
-   git push --follow-tags
+   tree-sitter generate && tree-sitter test
    ```
-4. Release the tagged commit: https://github.com/justinmk/tree-sitter-ini/releases/new
+4. Commit the generated files
+   ```
+   git add .
+   git commit -m 'release'
+   ```
+5. Push
+   ```
+   git push
+   ```
+6. Tag and release: https://github.com/justinmk/tree-sitter-ini/releases/new
 
