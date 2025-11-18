@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-ini",
-  "version": "1.2.1-dev.0",
+  "version": "1.4.0-dev.0",
   "description": "INI grammar for tree-sitter",
   "main": "bindings/node",
   "types": "bindings/node",
@@ -23,7 +23,7 @@
     "src/**"
   ],
   "author": "Justin M. Keyes",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
@@ -37,8 +37,8 @@
     }
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.7",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.20.8"
   },
   "tree-sitter": [
     {
