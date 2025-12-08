@@ -72,4 +72,8 @@ Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-p
    git push
    ```
 6. Tag and release: https://github.com/justinmk/tree-sitter-ini/releases/new
+7. Run
+   ```
+   cargo publish
+   ```
 
