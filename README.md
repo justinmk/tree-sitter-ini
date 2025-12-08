@@ -57,6 +57,9 @@ Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-p
    ```
 3. Regenerate and test.
    ```
+   rm Cargo.toml
+   tree-sitter init
+   cargo test
    tree-sitter generate && tree-sitter test
    ```
 4. Commit the generated files
