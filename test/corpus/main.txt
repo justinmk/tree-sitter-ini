@@ -377,3 +377,32 @@ c=d
     (setting
       (setting_name)
       (setting_value))))
+
+================================================================================
+multi-line setting values
+================================================================================
+
+[section]
+multi = foo? \
+bar ; not comment \
+ bay\s \
+baz
+multi2 =\
+still value \
+#
+# this is comment
+
+--------------------------------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value))
+    (setting
+      (setting_name)
+      (setting_value)))
+  (comment (text)))
+
