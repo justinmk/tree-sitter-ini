@@ -174,10 +174,8 @@ only comments
 (document
   (comment
     (text))
-  (comment
-    (text))
-  (comment
-    (text)))
+  (comment)
+  (comment))
 
 ================================================================================
 mixed comments #5
@@ -202,8 +200,7 @@ key1=val1
 --------------------------------------------------------------------------------
 
 (document
-  (comment
-    (text))
+  (comment)
   (comment
     (text))
   (comment
@@ -368,9 +365,10 @@ c=d
 (document
   (comment
       (text))
-  (setting
-    (setting_name)
-    (setting_value))
+  (unnamed_section
+      (setting
+        (setting_name)
+        (setting_value)))
   (comment
       (text))
   (section

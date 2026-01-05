@@ -6,44 +6,54 @@ module.exports = grammar({
 
   extras: $ => [
     $.comment,
-    $._blank,
-    /[\t ]/
+    $._eol,    //blank lines
+    $._space,
   ],
 
   rules: {
     document: $ => seq(
-      repeat($._blank),  // Eat blank lines at top of file.
-      optional(repeat(seq($.setting))),
-      repeat($.section),
+      optional($.unnamed_section),
+      repeat($.section)
     ),
+
+    // Unnamed Section has:
+    // - no title
+    // - one or more settings (name=value pairs)
+    unnamed_section: $ => repeat1($.setting),
 
     // Section has:
     // - a title
-    // - zero or more settings (name=value pairs)
-    // - comments (optional)
-    section: $ => prec.left(seq(
+    // - zero or more settings
+    section: $ => seq(
       $.section_name,
-      repeat(seq(
-        $.setting,
-      )),
-    )),
+      repeat($.setting)
+    ),
 
     section_name: $ => seq(
       '[',
       alias(/[^\[\]]+/, $.text),
       ']',
-      /\r?\n/,
+      $._eol
     ),
 
     setting: $ => seq(
-      alias(/[^;#=\s\[]+( *[^;#=\s\[])*/, $.setting_name),
+      $.setting_name,
       '=',
-      optional(alias(/.+/, $.setting_value)),
-      /\r?\n/,
+      optional($.setting_value),
+      $._eol
     ),
 
-    comment: $ => seq(/[;#]/, alias(/[^\r\n]*/, $.text), /\r?\n/),
+    setting_name: $ => /[^;#=\s\[]+( *[^;#=\s\[])*/,
+    setting_value: $ => token(choice(
+      /[^\r\n]*[^\r\n\\]/,              // single-line value, length > 0, prohibit trailing '\'
+      seq(
+        /[^\r\n]*/,                     // single-line value, length >= 0
+        repeat1(/\\\r?\n[^\r\n]*/)      // '\' + eol + a new line of text
+      )
+    )),
 
-    _blank: () => field('blank', /\r?\n/),
+    comment: $ => seq(/[;#]/, optional(alias(/[^\r\n]+/, $.text)), $._eol),
+    _eol: $ => /\r?\n/,
+    _space: $ => /[ \t]/,
   }
 });
