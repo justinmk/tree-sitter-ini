@@ -6,11 +6,23 @@ line continuation on setting values
 multi = foo? \
 bar ; not comment \
  bay\s \
-baz
+still=value
+
 multi2 =\
-still value \
+cont value \
 #
-# this is comment
+# atop is not comment
+
+legal = foo \
+\
+bar \
+\
+\
+end
+legal = foo \
+\
+
+# end of test
 
 --------------------------------------------------------------------------------
 
@@ -34,7 +46,26 @@ still value \
         (setting_value_cont
           (setting_text))
         (setting_value_cont
-          (setting_text)))))
+          (setting_text))))
+    (comment
+      (text))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)
+        (setting_value_cont)
+        (setting_value_cont
+          (setting_text))
+        (setting_value_cont)
+        (setting_value_cont)
+        (setting_value_cont
+          (setting_text))))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)
+        (setting_value_cont)
+        (setting_value_cont))))
   (comment
     (text)))
 
