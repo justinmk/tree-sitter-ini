@@ -33,7 +33,7 @@ module.exports = grammar({
       '[',
       alias(/[^\[\]]+/, $.text),
       ']',
-      $._eol
+      $._eol,
     ),
 
     setting: $ => seq(
@@ -43,7 +43,7 @@ module.exports = grammar({
       $._eol
     ),
 
-    setting_name: $ => /[^;#=\s\[]+( *[^;#=\s\[])*/,
+    setting_name: $ => /([^;#=\s\[\\]|(\\[^\r\n]))+( +([^;#=\s\[\\]|(\\[^\r\n]))+)*/,
     setting_value: $ => choice(
       $.setting_text,
       seq(

@@ -102,3 +102,46 @@ other esc seqs \t\t\ d
         (setting_text)
         (setting_value_cont
           (setting_text))))))
+
+================================================================================
+no line continuation on setting names
+================================================================================
+
+[section]
+illegal line cont\
+inuation = 1
+legal = 2
+illegal \\\
+name = 3
+legal escaped\t \\ name = 4
+legal \\= 5
+
+--------------------------------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (ERROR)
+      (setting_value
+        (setting_text)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)))
+    (setting
+      (setting_name)
+      (ERROR)
+      (setting_value
+        (setting_text)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)))))
+
