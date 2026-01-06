@@ -6,44 +6,63 @@ module.exports = grammar({
 
   extras: $ => [
     $.comment,
-    $._blank,
-    /[\t ]/
+    $._eol,    //blank lines
+    $._space,
   ],
 
   rules: {
     document: $ => seq(
-      repeat($._blank),  // Eat blank lines at top of file.
-      optional(repeat(seq($.setting))),
-      repeat($.section),
+      optional($.unnamed_section),
+      repeat($.section)
     ),
+
+    // Unnamed Section has:
+    // - no title
+    // - one or more settings (name=value pairs)
+    unnamed_section: $ => repeat1($.setting),
 
     // Section has:
     // - a title
-    // - zero or more settings (name=value pairs)
-    // - comments (optional)
-    section: $ => prec.left(seq(
+    // - zero or more settings
+    section: $ => seq(
       $.section_name,
-      repeat(seq(
-        $.setting,
-      )),
-    )),
+      repeat($.setting)
+    ),
 
     section_name: $ => seq(
       '[',
       alias(/[^\[\]]+/, $.text),
       ']',
-      /\r?\n/,
+      $._eol
     ),
 
     setting: $ => seq(
-      alias(/[^;#=\s\[]+( *[^;#=\s\[])*/, $.setting_name),
+      $.setting_name,
       '=',
-      optional(alias(/.+/, $.setting_value)),
-      /\r?\n/,
+      optional($.setting_value),
+      $._eol
     ),
 
-    comment: $ => seq(/[;#]/, alias(/[^\r\n]*/, $.text), /\r?\n/),
+    setting_name: $ => /[^;#=\s\[]+( *[^;#=\s\[])*/,
+    setting_value: $ => choice(
+      $.setting_text,
+      seq(
+        optional($.setting_text),
+        repeat1($.setting_value_cont)
+      )
+    ),
 
-    _blank: () => field('blank', /\r?\n/),
+    setting_value_cont: $ => seq(
+      $._line_cont,
+      optional($.setting_text)
+    ),
+    setting_text: $ => repeat1(choice(/[^\r\n]/, $._esc_bkslsh)),
+
+    _line_cont: $ => token(prec(0, /\\\r?\n/)),
+    _esc_bkslsh: $ => token(prec(1, "\\\\")),
+
+    comment: $ => seq(/[;#]/, optional(alias(/[^\r\n]+/, $.text)), $._eol),
+    _eol: $ => /\r?\n/,
+    _space: $ => /[ \t]/,
   }
 });
