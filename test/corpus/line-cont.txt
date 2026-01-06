@@ -1,0 +1,73 @@
+================================================================================
+line continuation on setting values
+================================================================================
+
+[section]
+multi = foo? \
+bar ; not comment \
+ bay\s \
+baz
+multi2 =\
+still value \
+#
+# this is comment
+
+--------------------------------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)
+        (setting_value_cont
+          (setting_text))
+        (setting_value_cont
+          (setting_text))
+        (setting_value_cont
+          (setting_text))))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_value_cont
+          (setting_text))
+        (setting_value_cont
+          (setting_text)))))
+  (comment
+    (text)))
+
+===========================================
+escaped backslash
+===========================================
+
+[section]
+single = escaped backslash \\
+multi = foo \
+bar \\
+multi = esc before line cont \\\
+other esc seqs \t\t\ d
+
+--------------------------------------------
+
+(document
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)
+        (setting_value_cont
+          (setting_text))))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)
+        (setting_value_cont
+          (setting_text))))))

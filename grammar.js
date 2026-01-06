@@ -44,13 +44,22 @@ module.exports = grammar({
     ),
 
     setting_name: $ => /[^;#=\s\[]+( *[^;#=\s\[])*/,
-    setting_value: $ => token(choice(
-      /[^\r\n]*[^\r\n\\]/,              // single-line value, length > 0, prohibit trailing '\'
+    setting_value: $ => choice(
+      $.setting_text,
       seq(
-        /[^\r\n]*/,                     // single-line value, length >= 0
-        repeat1(/\\\r?\n[^\r\n]*/)      // '\' + eol + a new line of text
+        optional($.setting_text),
+        repeat1($.setting_value_cont)
       )
-    )),
+    ),
+
+    setting_value_cont: $ => seq(
+      $._line_cont,
+      optional($.setting_text)
+    ),
+    setting_text: $ => repeat1(choice(/[^\r\n]/, $._esc_bkslsh)),
+
+    _line_cont: $ => token(prec(0, /\\\r?\n/)),
+    _esc_bkslsh: $ => token(prec(1, "\\\\")),
 
     comment: $ => seq(/[;#]/, optional(alias(/[^\r\n]+/, $.text)), $._eol),
     _eol: $ => /\r?\n/,
