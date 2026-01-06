@@ -109,31 +109,95 @@
       "value": "[^;#=\\s\\[]+( *[^;#=\\s\\[])*"
     },
     "setting_value": {
-      "type": "TOKEN",
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "setting_text"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "setting_text"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "setting_value_cont"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "setting_value_cont": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_line_cont"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "setting_text"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "setting_text": {
+      "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
         "members": [
           {
             "type": "PATTERN",
-            "value": "[^\\r\\n]*[^\\r\\n\\\\]"
+            "value": "[^\\r\\n]"
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              },
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "\\\\\\r?\\n[^\\r\\n]*"
-                }
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_esc_bkslsh"
           }
         ]
+      }
+    },
+    "_line_cont": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 0,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\\\\\r?\\n"
+        }
+      }
+    },
+    "_esc_bkslsh": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "STRING",
+          "value": "\\\\"
+        }
       }
     },
     "comment": {
