@@ -13,7 +13,8 @@ foo = bar
       (text))
     (setting
       (setting_name)
-      (setting_value))))
+      (setting_value
+        (setting_text)))))
 
 ================================================================================
 setting value may be null/empty #9
@@ -39,14 +40,16 @@ setting-5 =
       (setting_name))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name))
     (comment
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)))
   (section
@@ -74,16 +77,20 @@ ignore all white space   =   my value
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))))
+      (setting_value
+        (setting_text)))))
 
 ================================================================================
 many sections, some empty
@@ -126,13 +133,15 @@ foo = bar
       (text))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (section
     (section_name
       (text)))
@@ -141,10 +150,12 @@ foo = bar
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (comment
       (text))
     (comment
@@ -153,10 +164,12 @@ foo = bar
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (comment
     (text))
   (comment
@@ -214,7 +227,8 @@ key1=val1
       (text))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (comment
     (text))
   (section
@@ -226,7 +240,8 @@ key1=val1
       (text))
     (setting
       (setting_name)
-      (setting_value))))
+      (setting_value
+        (setting_text)))))
 
 ================================================================================
 one section (empty)
@@ -256,10 +271,12 @@ zim = -1>3 ; not-a-comment
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))))
+      (setting_value
+        (setting_text)))))
 
 ================================================================================
 invalid section
@@ -270,11 +287,16 @@ invalid section
 --------------------------------------------------------------------------------
 
 (document
-  (ERROR
-    (text)
-    (UNEXPECTED 'a')
-    (UNEXPECTED 'b'))
-    (comment (text)))
+  (section
+    (section_name
+      (text)
+      (MISSING _eol))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text))
+      ))
+  )
 
 ================================================================================
 ~/.aws/config
@@ -315,10 +337,12 @@ output = json
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (section
     (section_name
       (text))
@@ -326,31 +350,38 @@ output = json
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (comment
       (text))
     (comment
       (text))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value))
+      (setting_value
+        (setting_text)))
     (setting
       (setting_name)
-      (setting_value)))
+      (setting_value
+        (setting_text))))
   (comment
     (text)))
+
 ================================================================================
 global-parameters
 ================================================================================
@@ -364,16 +395,18 @@ c=d
 
 (document
   (comment
-      (text))
+    (text))
   (unnamed_section
-      (setting
-        (setting_name)
-        (setting_value)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text))))
   (comment
-      (text))
+    (text))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
-      (setting_value))))
+      (setting_value
+        (setting_text)))))
