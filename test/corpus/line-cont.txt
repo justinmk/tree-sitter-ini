@@ -31,6 +31,7 @@ still = value
 ================================================================================
 comments in continued lines
 ================================================================================
+# see `man 7 systemd.syntax`.
 
 setting = value1 \
 # this line is comment
@@ -42,6 +43,8 @@ value3
 --------------------------------------------------------------------------------
 
 (document
+  (comment
+    (text))
   (unnamed_section
     (setting
       (setting_name)
