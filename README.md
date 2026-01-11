@@ -28,13 +28,16 @@ Notes
 - Section name must appear on a line by itself.
 - Equals sign (=) and semicolon (;) are [reserved characters](https://en.wikipedia.org/wiki/INI_file#Key-value_pairs)
   and cannot appear in the key. Any whitespace surrounding the key is stripped.
-- Comments (`;` or `#`) must start at column 1. Trailing comments are not supported yet. [#13](https://github.com/justinmk/tree-sitter-ini/issues/13)
+- Comments (`;` or `#`) must appear on a line by itself. Trailing comments are not supported yet. [#13](https://github.com/justinmk/tree-sitter-ini/issues/13)
 - Duplicate names are not checked.
-- Line continuations (`\`) are not supported.
+- Line continuations (`\`) are only supported on setting values.
 - `setting_value` includes whitespace. [#3](https://github.com/justinmk/tree-sitter-ini/issues/3).
   Should values exclude surrounding whitespace?
 - [Quoted keys/values](https://en.wikipedia.org/wiki/INI_file#Quoted_values) are not supported yet.
-- Escape sequences are not supported.
+- Escape sequences are supported at minimum.
+    - `\<LF>` (line continuations) and `\\` are supported.
+    - all other sequences are treated literally and have no special meaning.
+    - no highlights, conversions or legimity checks.
 
 Reference
 ---------
