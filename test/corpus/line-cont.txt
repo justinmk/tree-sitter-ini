@@ -18,15 +18,15 @@ still = value
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont
-          (setting_text_cont))
+          (text))
         (setting_value_cont
-          (setting_text_cont))
+          (text))
         (setting_value_cont
-          (setting_text_cont))
+          (text))
         (setting_value_cont
-          (setting_text_cont))))))
+          (text))))))
 
 ================================================================================
 comments in continued lines
@@ -46,17 +46,17 @@ value3
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont
           (comment
             (text))
           (comment
             (text))
-          (setting_text_cont))
+          (text))
         (setting_value_cont
           (comment
             (text))
-          (setting_text_cont))))))
+          (text))))))
 
 ================================================================================
 empty continued lines
@@ -83,30 +83,30 @@ foo = 3
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont)
         (setting_value_cont
-          (setting_text_cont))
+          (text))
         (setting_value_cont)
         (setting_value_cont)
         (setting_value_cont
-          (setting_text_cont))
+          (text))
         (setting_value_cont)
         (comment
           (text))
         (setting_value_cont
           (comment
             (text))
-          (setting_text_cont))))
+          (text))))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))
 
 ===========================================
 escaped sequences
@@ -130,23 +130,23 @@ esc\\ in keys \\= 1
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont
-          (setting_text_cont))))
+          (text))))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)
+        (text)
         (setting_value_cont
-          (setting_text_cont))))
+          (text))))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text))))
@@ -183,25 +183,25 @@ foo = bar
       (ERROR
         (setting_name))
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (ERROR
         (setting_name))
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text)
@@ -210,14 +210,14 @@ foo = bar
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (ERROR
     (text)
     (setting_name)

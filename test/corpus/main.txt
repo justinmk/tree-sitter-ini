@@ -14,7 +14,7 @@ foo = bar
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))
 
 ================================================================================
 setting value may be null/empty #9
@@ -41,7 +41,7 @@ setting-5 =
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name))
     (comment
@@ -49,7 +49,7 @@ setting-5 =
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)))
   (section
@@ -78,19 +78,19 @@ ignore all white space   =   my value
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))
 
 ================================================================================
 many sections, some empty
@@ -134,14 +134,14 @@ foo = bar
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text)))
@@ -151,11 +151,11 @@ foo = bar
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (comment
       (text))
     (comment
@@ -165,11 +165,11 @@ foo = bar
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (comment
     (text))
   (comment
@@ -228,7 +228,7 @@ key1=val1
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (comment
     (text))
   (section
@@ -241,7 +241,7 @@ key1=val1
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))
 
 ================================================================================
 one section (empty)
@@ -272,11 +272,11 @@ zim = -1>3 ; not-a-comment
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))
 
 ================================================================================
 invalid section
@@ -294,7 +294,7 @@ invalid section
     (setting
       (setting_name)
       (setting_value
-        (setting_text))
+        (text))
       ))
   )
 
@@ -338,11 +338,11 @@ output = json
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text))
@@ -351,18 +351,18 @@ output = json
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (section
     (section_name
       (text))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (comment
       (text))
     (comment
@@ -370,15 +370,15 @@ output = json
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))
+        (text)))
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (comment
     (text)))
 
@@ -400,7 +400,7 @@ c=d
     (setting
       (setting_name)
       (setting_value
-        (setting_text))))
+        (text))))
   (comment
     (text))
   (section
@@ -409,4 +409,4 @@ c=d
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
+        (text)))))

@@ -55,15 +55,15 @@ module.exports = grammar({
 
     setting_name: $ => regexp_names("[^\\s\\[\\]\\\\;#=]"),
     setting_value: $ => choice(
-      $.setting_text,
+      alias($.setting_text, $.text),
       seq(
-        optional($.setting_text),
+        optional(alias($.setting_text, $.text)),
         repeat1($.setting_value_cont)
       )
     ),
     setting_value_cont: $ => seq(
       /\\\r?\n/,
-      optional($.setting_text_cont),
+      optional(alias($.setting_text_cont, $.text)),
     ),
 
     // setting text (non-continued) includes:
@@ -78,8 +78,8 @@ module.exports = grammar({
     // - and requires the 1st non-space char not being ";#" (comments)
     // transformed to:
     // 1. consume all leading spaces
-    // 2. match one setting_test char that is also not space or ";#",
-    // 3. match zero or more setting_test char
+    // 2. match one setting_text char that is also not space or ";#",
+    // 3. match zero or more setting_text char
     // NOTE: tree-sitter treats "\s" as " \t\r\n"
     setting_text_cont: $ => /[ \t]*(([^\s\\;#])|(\\[^\r\n]))(([^\r\n\\])|(\\[^\r\n]))*/,
 
