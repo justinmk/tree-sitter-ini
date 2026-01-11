@@ -5,24 +5,9 @@ line continuation on setting values
 [section]
 multi = foo? \
 bar ; not comment \
- bay\s \
-still=value
-
-multi2 =\
-cont value \
-#
-# atop is not comment
-
-legal = foo \
-\
-bar \
-\
-\
-end
-legal = foo \
-\
-
-# end of test
+[not section] \
+ can have space \
+still = value
 
 --------------------------------------------------------------------------------
 
@@ -35,42 +20,96 @@ legal = foo \
       (setting_value
         (setting_text)
         (setting_value_cont
-          (setting_text))
+          (setting_text_cont))
         (setting_value_cont
-          (setting_text))
+          (setting_text_cont))
         (setting_value_cont
-          (setting_text))))
+          (setting_text_cont))
+        (setting_value_cont
+          (setting_text_cont))))))
+
+================================================================================
+comments in continued lines
+================================================================================
+
+setting = value1 \
+# this line is comment
+; also comment
+value2 \
+  # comment with indent
+value3 
+
+--------------------------------------------------------------------------------
+
+(document
+  (unnamed_section
     (setting
       (setting_name)
       (setting_value
+        (setting_text)
         (setting_value_cont
-          (setting_text))
+          (comment
+            (text))
+          (comment
+            (text))
+          (setting_text_cont))
         (setting_value_cont
-          (setting_text))))
-    (comment
-      (text))
+          (comment
+            (text))
+          (setting_text_cont))))))
+
+================================================================================
+empty continued lines
+================================================================================
+
+setting = value1 \
+\
+value2 \
+\
+\
+value3 \
+# comment
+\
+; also comment
+value4 
+setting2 = ended next line \
+
+foo = 3
+
+--------------------------------------------------------------------------------
+
+(document
+  (unnamed_section
     (setting
       (setting_name)
       (setting_value
         (setting_text)
         (setting_value_cont)
         (setting_value_cont
-          (setting_text))
+          (setting_text_cont))
         (setting_value_cont)
         (setting_value_cont)
         (setting_value_cont
-          (setting_text))))
+          (setting_text_cont))
+        (setting_value_cont)
+        (comment
+          (text))
+        (setting_value_cont
+          (comment
+            (text))
+          (setting_text_cont))))
     (setting
       (setting_name)
       (setting_value
         (setting_text)
-        (setting_value_cont)
-        (setting_value_cont))))
-  (comment
-    (text)))
+        (setting_value_cont)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text)))))
 
 ===========================================
-escaped backslash
+escaped sequences
 ===========================================
 
 [section]
@@ -78,7 +117,9 @@ single = escaped backslash \\
 multi = foo \
 bar \\
 multi = esc before line cont \\\
-other esc seqs \t\t\ d
+other esc seqs \t\ \ 
+esc\\ in keys \\= 1
+[esc seq\tin section\\]
 
 --------------------------------------------
 
@@ -95,16 +136,23 @@ other esc seqs \t\t\ d
       (setting_value
         (setting_text)
         (setting_value_cont
-          (setting_text))))
+          (setting_text_cont))))
     (setting
       (setting_name)
       (setting_value
         (setting_text)
         (setting_value_cont
-          (setting_text))))))
+          (setting_text_cont))))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text))))
+  (section
+    (section_name
+      (text))))
 
 ================================================================================
-no line continuation on setting names
+invalid line continuation locations
 ================================================================================
 
 [section]
@@ -115,6 +163,14 @@ illegal \\\
 name = 3
 legal escaped\t \\ name = 4
 legal \\= 5
+[illegal on \
+section]
+foo = bar
+
+[foo]
+bar = baz
+[illegal after section] \
+foo = bar
 
 --------------------------------------------------------------------------------
 
@@ -124,7 +180,8 @@ legal \\= 5
       (text))
     (setting
       (setting_name)
-      (ERROR)
+      (ERROR
+        (setting_name))
       (setting_value
         (setting_text)))
     (setting
@@ -133,7 +190,8 @@ legal \\= 5
         (setting_text)))
     (setting
       (setting_name)
-      (ERROR)
+      (ERROR
+        (setting_name))
       (setting_value
         (setting_text)))
     (setting
@@ -143,5 +201,24 @@ legal \\= 5
     (setting
       (setting_name)
       (setting_value
-        (setting_text)))))
-
+        (setting_text))))
+  (section
+    (section_name
+      (text)
+      (ERROR
+        (setting_name)))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text))))
+  (section
+    (section_name
+      (text))
+    (setting
+      (setting_name)
+      (setting_value
+        (setting_text))))
+  (ERROR
+    (text)
+    (setting_name)
+    (setting_name)))

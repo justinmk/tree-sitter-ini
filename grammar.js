@@ -1,6 +1,16 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+// generate regexp for ini names, that is:
+// - accept escape sequences excluding line-cont
+// - accept arbitary spaces within, but not leading or trailing
+// exp_chars expression should disallow spaces and backslashes
+function regexp_names(exp_chars, exp_space = "[ \\t]") {
+  let exp_chars_esc = `(${exp_chars})|(\\\\[^\\r\\n])`;
+  let exp = `(${exp_chars_esc})+((${exp_space})+(${exp_chars_esc})+)*`;
+  return new RegExp(exp);
+}
+
 module.exports = grammar({
   name: 'ini',
 
@@ -31,7 +41,7 @@ module.exports = grammar({
 
     section_name: $ => seq(
       '[',
-      alias(/[^\[\]]+/, $.text),
+      alias(regexp_names("[^\\s\\[\\]\\\\]"), $.text), //allows ";#", but should we?
       ']',
       $._eol,
     ),
@@ -43,7 +53,7 @@ module.exports = grammar({
       $._eol
     ),
 
-    setting_name: $ => /([^;#=\s\[\\]|(\\[^\r\n]))+( +([^;#=\s\[\\]|(\\[^\r\n]))+)*/,
+    setting_name: $ => regexp_names("[^\\s\\[\\]\\\\;#=]"),
     setting_value: $ => choice(
       $.setting_text,
       seq(
@@ -51,15 +61,27 @@ module.exports = grammar({
         repeat1($.setting_value_cont)
       )
     ),
-
     setting_value_cont: $ => seq(
-      $._line_cont,
-      optional($.setting_text)
+      /\\\r?\n/,
+      optional($.setting_text_cont),
     ),
-    setting_text: $ => repeat1(choice(/[^\r\n]/, $._esc_bkslsh)),
 
-    _line_cont: $ => token(prec(0, /\\\r?\n/)),
-    _esc_bkslsh: $ => token(prec(1, "\\\\")),
+    // setting text (non-continued) includes:
+    // - all non-LF non-line-cont chars
+    // and is equal to:
+    // - all non-LF non-backslash chars,
+    // - or all 2-char escape sequences omitting line-cont
+    setting_text: $ => /(([^\r\n\\])|(\\[^\r\n]))+/,
+
+    // setting text (continued) inclcudes:
+    // - exactly the same as setting_text,
+    // - and requires the 1st non-space char not being ";#" (comments)
+    // transformed to:
+    // 1. consume all leading spaces
+    // 2. match one setting_test char that is also not space or ";#",
+    // 3. match zero or more setting_test char
+    // NOTE: tree-sitter treats "\s" as " \t\r\n"
+    setting_text_cont: $ => /[ \t]*(([^\s\\;#])|(\\[^\r\n]))(([^\r\n\\])|(\\[^\r\n]))*/,
 
     comment: $ => seq(/[;#]/, optional(alias(/[^\r\n]+/, $.text)), $._eol),
     _eol: $ => /\r?\n/,
